@@ -4,67 +4,39 @@ import 'package:audioplayers/audio_cache.dart';
 void main() => runApp(XylophoneApp());
 
 class XylophoneApp extends StatelessWidget {
+  final player = AudioCache();
   void playSound(int soundNumber) {
-    final player = AudioCache();
     player.play('note$soundNumber.wav');
+  }
+
+  Widget buildKey(Color color, int soundNumber, String soundText) {
+    return Expanded(
+      child: FlatButton(
+        color: color,
+        onPressed: () {
+          playSound(soundNumber);
+        },
+        child: Text(soundText),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        backgroundColor: Colors.black,
         body: SafeArea(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              FlatButton(
-                color: Colors.red,
-                onPressed: () {
-                  playSound(1);
-                },
-                child: Text('도'),
-              ),
-              FlatButton(
-                color: Colors.orange,
-                onPressed: () {
-                  playSound(2);
-                },
-                child: Text('레'),
-              ),
-              FlatButton(
-                color: Colors.yellow,
-                onPressed: () {
-                  playSound(3);
-                },
-                child: Text('미'),
-              ),
-              FlatButton(
-                color: Colors.green,
-                onPressed: () {
-                  playSound(4);
-                },
-                child: Text('파'),
-              ),
-              FlatButton(
-                color: Colors.blue,
-                onPressed: () {
-                  playSound(5);
-                },
-                child: Text('솔'),
-              ),
-              FlatButton(
-                color: Colors.indigo,
-                onPressed: () {
-                  playSound(6);
-                },
-                child: Text('라'),
-              ),
-              FlatButton(
-                color: Colors.purple,
-                onPressed: () {
-                  playSound(7);
-                },
-                child: Text('시'),
-              ),
+              buildKey(Colors.red, 1, '도'),
+              buildKey(Colors.orange, 2, '레'),
+              buildKey(Colors.yellow, 3, '미'),
+              buildKey(Colors.green, 4, '파'),
+              buildKey(Colors.blue, 5, '솔'),
+              buildKey(Colors.indigo, 6, '라'),
+              buildKey(Colors.purple, 7, '시'),
             ],
           ),
         ),
